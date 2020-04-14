@@ -1,0 +1,14 @@
+.search h1{
+    margin-top: 2%;
+    text-align: center;
+}
+
+#products{
+    padding: 10px 30px;
+}
+
+#products img{
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}

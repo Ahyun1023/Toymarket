@@ -1,0 +1,33 @@
+.mypage_menu #f{
+    margin-left: 30%;
+    float: left;
+}
+
+.mypage_menu img{
+    cursor: pointer;
+}
+
+.mypage_menu a{
+    text-decoration: none;
+    color: black;
+}
+
+.mypage_menu a:hover{
+    text-decoration: underline;
+}
+
+.user_info{
+    text-align: center;
+}
+
+.order_info, .saw_info{
+    text-align: center;
+}
+
+.order_info #history, .saw_info #history{
+    border: 1px solid black;
+    margin-left: 17.6%;
+    border-radius: 5px;
+    padding: 180px 50px;
+    width: 60%;
+}

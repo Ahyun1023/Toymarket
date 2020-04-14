@@ -1,0 +1,41 @@
+.signup, .login, .change_info{
+    text-align: center;
+    border: 1px solid black;
+    border-radius:10px;
+    width: 60%;
+}
+
+.signup{
+    margin-top: 2%;
+    margin-left: 20%;
+    padding: 10px;
+}
+
+.login{
+    margin-top: 3%;
+    margin-left: 13%;
+    padding: 150px;
+}
+
+.change_info{
+    margin-top: 2%;
+    margin-left: 20%;
+    padding: 50px;
+}
+
+.signup input, .login input, .change_info input{
+    width: 30%;
+    padding: 15px 20px;
+    margin: 8px 0;
+}
+
+.signup button, .login button, .change_info button{
+    padding: 15px 30px;
+    margin-top: 30px;
+    background-color: #BCFFC0;
+    border: none;
+}
+
+.signup button:hover, .login button:hover, .change_info button:hover{
+    background-color: #B2EDB6;
+}
