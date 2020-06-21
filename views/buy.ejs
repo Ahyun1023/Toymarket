@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToyMarket</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap&subset=korean" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/buy.css">
+    <link rel="stylesheet" href="/public/css/common.css">
+    <script src="/public/js/common.js" type="text/javascript"></script>
+    <script src="/public/js/buy.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        window.onload = function(){
+            automatic_required();
+            check_savings();
+        }
+    </script>
+</head>
+<body>
+    <div id="up_menu">
+        <span id="logo"><a href="/public/main.html"><img src="/public/img/logo.png"></a></span>
+        <form action="/search/name" method="GET" id="search">
+            <input type="text" name="search_word" id="search_word" required>
+            <button id="search_button" type="submit">검색</button>
+        </form>
+        <span id="up_a_menu" style="margin-left: 29.4%;">
+            <a href='#' id='logout' onclick='logout()'>로그아웃</a>
+            <a href="#" onclick="cart()">장바구니</a>
+            <a href='#' id='mypage' onclick="mypage()">마이페이지</a>
+            <form action="/go_cart" method="POST" name="go_cart">
+            </form>
+            <form action="/go_mypage" method="POST" name="go_mypage">
+            </form>
+        </span>
+    </div>
+    <br><br><br><br><br><br>
+    <div id="quick_menu">
+        <span>퀵메뉴</span>
+        <hr style= "border: 2px solid gray;">
+        <span><a href="#" onclick="go_order_list()">주문 목록</a></span>
+        <hr>
+        <span><a href="#" id="cart" onclick="cart()">장바구니</a></span>
+        <hr>
+        <span><a href='#' id='mypage' onclick="mypage()">마이페이지</a></span>
+        <span><button onclick="Go_top()">TOP</button></span>
+    </div>
+    <div id="list_menu">
+        <ul>
+            <li><a href="/search/id?Bid=0">게임</a>
+            <ul>
+                <li><a href="/search/id?Bid=0&Sid=0">닌텐도 3DS</a></li>
+                <li><a href="/search/id?Bid=0&Sid=1">닌텐도 스위치</a></li>
+                <li><a href="/search/id?Bid=0&Sid=2">선불카드</a></li>
+                <li><a href="/search/id?Bid=0&Sid=3">아미보</a></li>
+                <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
+            </ul>
+        </li>
+            <li><a href="#">퍼즐/블록</a>
+            <ul>
+                <li><a href="#B1">레고</a></li>
+                <li><a href="#B2">옥스포드</a></li>
+                <li><a href="#B3">캐릭터 상품</a></li>
+            </ul>
+        </li>
+            <li><a href="#">인형</a>
+            <ul>
+                <li><a href="#C1">캐릭터 인형</a></li>
+                <li><a href="#C2">봉제 인형</a></li>
+                <li><a href="#C3">피규어</a></li>
+                <li><a href="#C4">작동 인형</a></li>
+                <li><a href="#C5">동물 인형</a></li>
+            </ul>
+        </li>
+            <li><a href="#">야외/스포츠</a>
+            <ul>
+                <li><a href="#D1">공</a></li>
+                <li><a href="#D2">낚시/골프</a></li>
+                <li><a href="#D3">비누방울</a></li>
+                <li><a href="#D4">줄넘기</a></li>
+            </ul>
+        </li>
+            <li><a href="#">조종/기차/자동차</a>
+            <ul>
+                <li><a href="#E1">변신 장난감</a></li>
+                <li><a href="#E2">조종 장난감</a></li>
+                <li><a href="#E3">수집 장난감</a></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>이미지</th>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>금액</th>
+                <th>적립 예정</th>
+            </tr>
+            <tr>
+                <input type="hidden" id="count" value="<%- count %>">
+                <% for(var i = 0; i < count; i++){ %>
+                    <tr>
+                        <td><a href="/product?id=<%- product[i][0] %>"><img src="/public<%- product_info[i].image %>"></a></td>
+                        <td><a href="/product?id=<%- product[i][0] %>" id="name"><%- product_info[i].name %></a></td>
+                        <td><p id="count<%= i %>"><%- product[i][1] %>개</p></td>
+                        <input type="hidden" id="<%= i %>" value="<%- products_id[i] %>">
+                        <td><p id="price"><%- product[i][2]%>원</p></td>
+                        <td><p id="savings"><%- product[i][4] %>P</p></td>
+                    </tr>
+                <% } %>
+            </tr>
+        </table>
+        <hr>
+        <div id="total">
+            <p>상품수량: <span id="total_count"><%- total.count %></span>개</p>
+            <p>총 금액: <span id="total_price"><%- total.price %></span>원</p>
+            <p>배송비: <span id="total_shipping_fee"><%- total.shipping_fee %></span>원</p>
+            <p>적립 예정: <span id="total_savings"><%- total.saving %></span>P</p>
+            <hr>
+            <p id="final">합계 금액: <span id="total_cal"><%- total.all_price %></span>원</p>
+        </div>
+    </div>
+    <h3>주문자 정보</h3>
+    <hr id="bold_hr">
+    <div id="user_info">
+        <table>
+            <tr>
+                <td>주문하시는 분</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="user_name" value="<%- user.name %>" readonly style="cursor: not-allowed;"></td>
+            </tr>
+            <tr>
+                <td>전화 번호</td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="user_phone1">
+                        <option value="<%- user.phone1 %>"><%- user.phone1 %></option>
+                        <option value="010">010</option>
+                        <option value="02">02</option>
+                        <option value="053">053</option>
+                        <option value="052">052</option>
+                        <option value="031">031</option>
+                    </select>
+                    <input type="number" id="user_phone2" oninput="numberMax(this)" value="<%- user.phone2 %>">
+                    <input type="number" id="user_phone3" oninput="numberMax(this)" value="<%- user.phone3 %>">
+                </td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="user_email" placeholder="email" value="<%- user.email %>">@
+                    <select id="email_form">
+                        <option value="<%- user.email_form %>"><%- user.email_form %></option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="nate.com">nate.com</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3>배송 정보</h3>
+    <hr id="bold_hr">
+    <div id="shipping_address">
+        <table>
+            <tr>
+                <td>받으실 분</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="receiver" value="<%- user.name %>"></td>
+            </tr>
+            <tr>
+                <td>받으실 주소</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="receive_address" value="<%- user.address %>" id="receive_address"></td>
+            </tr>
+            <tr>
+                <td>전화 번호</td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="phone_number1">
+                        <option value="<%- user.phone1 %>"><%- user.phone1 %></option>
+                        <option value="010">010</option>
+                        <option value="02">02</option>
+                        <option value="053">053</option>
+                        <option value="052">052</option>
+                        <option value="031">031</option>
+                    </select>
+                    <input type="number" id="phone_number2" oninput="numberMax(this)" value="<%- user.phone2 %>">
+                    <input type="number" id="phone_number3" oninput="numberMax(this)" value="<%- user.phone3 %>">
+                </td>
+            </tr>
+            <tr>
+                <td>남기실 말씀</td>
+            </tr>
+            <tr>
+                <td><input type="text" name="remark" id="remark"></td>
+            </tr>
+        </table>
+    </div>
+    <h3>결제 정보</h3>
+    <hr id="bold_hr">
+    <div id="payment_info">
+        <table>
+            <tr><td>상품 합계 금액: <span id="before_price"><%- total.price %></span>원</td></tr>
+            <tr><td>배송비: <%- total.shipping_fee %>원</td></tr>
+            <tr><td>적립금 사용: <input type="number" id="use_saving" onkeyup="check_savings()" value="0">P</td></tr>
+            <tr><td id="savings_alert">*<span id="have_saving"><%- user.savings %></span>P 만큼 사용 가능합니다.</td></tr>
+            <tr><td>최종 결제 금액: <span id="after_price"><%- total.price %></span>원</td></tr>
+        </table>
+    </div>
+    <h3>결제 수단 선택</h3>
+    <hr id="bold_hr">
+    <div id="payment">
+        <table>
+            <tr>
+                <td>
+                    <label for="radio1"><input type="radio" name="payments" value="credit_card" id="radio1">신용카드</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="radio2"><input type="radio" name="payments" value="bank_transfer" id="radio2">계좌이체</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="final_cal">
+        <h3 style="font-size: 25px;">최종 금액</h3>
+        <p><span id="final_price"><%- total.all_price %></span>원</p>
+        <p><label for="check" style="cursor: pointer;"><input type="checkbox" id="check" name="check">(필수)구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</label></p>
+        <p><button id="order_button" onclick="order()">구매</button> <button id="cart_button" onclick="cart()">장바구니</button></p>
+    </div>
+    <br>
+    <hr style="border: 3px solid gray;"><br>
+    <div id="under">
+        <div class="under_notice">
+            <a href="#">회사소개 </a>|
+            <a href="#">법적고지 </a>|
+            <a href="#">회원약관 </a>|
+            <a href="#">광고/임대문의 </a>|
+            <a href="#" class="im">개인정보처리방침 </a>|
+            <a href="#">윤리경영</a>
+        </div>
+        <br>
+        <div class="info">
+            <p>대표이사: ○○○</p>
+            <p>사업자등록번호: ○○○-○○-○○○</p>
+            <p>고객센터: 1234-5678</p>
+            <p>사업장주소: ○○○○시 ○○구 ○○동 ○○건물 ○층</p>
+        </div>
+    </div>
+</body>
+</html>

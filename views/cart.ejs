@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap&subset=korean" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/common.css">
+    <link rel="stylesheet" href="/public/css/cart.css">
+    <script src="/public/js/common.js" type="text/javascript"></script>
+    <script src="/public/js/cart.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>ToyMarket</title>
+</head>
+<body onload="automatic_all()">
+    <div id="up_menu">
+        <span id="logo"><a href="/public/main.html"><img src="/public/img/logo.png"></a></span>
+        <form action="/search/name" method="GET" id="search">
+            <input type="text" name="search_word" id="search_word" required>
+            <button id="search_button" type="submit">검색</button>
+        </form>
+        <span id="up_a_menu">
+            <a href="/public/signup.html" id="signup">회원가입</a>
+            <a href="/public/login.html" id="login">로그인</a>
+            <a href="#" id="cart" onclick="cart()">장바구니</a>
+            <a href='#' id='mypage' onclick="mypage()">마이페이지</a>
+            <form action="/go_mypage" method="POST" name="go_mypage">
+            </form>
+            <form action="/go_cart" method="POST" name="go_cart">
+            </form>
+        </span>
+    </div>
+    <br><br><br><br><br><br>
+    <div id="quick_menu">
+        <span>퀵메뉴</span>
+        <hr style= "border: 2px solid gray;">
+        <span><a href="#" onclick="go_order_list()">주문 목록</a></span>
+        <hr>
+        <span><a href="#" id="cart" onclick="cart()">장바구니</a></span>
+        <hr>
+        <span><a href='#' id='mypage' onclick="mypage()">마이페이지</a></span>
+        <span><button onclick="Go_top()">TOP</button></span>
+    </div>
+    <div id="list_menu">
+        <ul>
+            <li><a href="/search/id?Bid=0">게임</a>
+            <ul>
+                <li><a href="/search/id?Bid=0&Sid=0">닌텐도 3DS</a></li>
+                <li><a href="/search/id?Bid=0&Sid=1">닌텐도 스위치</a></li>
+                <li><a href="/search/id?Bid=0&Sid=2">선불카드</a></li>
+                <li><a href="/search/id?Bid=0&Sid=3">아미보</a></li>
+                <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
+            </ul>
+        </li>
+            <li><a href="#">퍼즐/블록</a>
+            <ul>
+                <li><a href="#B1">레고</a></li>
+                <li><a href="#B2">옥스포드</a></li>
+                <li><a href="#B3">캐릭터 상품</a></li>
+            </ul>
+        </li>
+            <li><a href="#">인형</a>
+            <ul>
+                <li><a href="#C1">캐릭터 인형</a></li>
+                <li><a href="#C2">봉제 인형</a></li>
+                <li><a href="#C3">피규어</a></li>
+                <li><a href="#C4">작동 인형</a></li>
+                <li><a href="#C5">동물 인형</a></li>
+            </ul>
+        </li>
+            <li><a href="#">야외/스포츠</a>
+            <ul>
+                <li><a href="#D1">공</a></li>
+                <li><a href="#D2">낚시/골프</a></li>
+                <li><a href="#D3">비누방울</a></li>
+                <li><a href="#D4">줄넘기</a></li>
+            </ul>
+        </li>
+            <li><a href="#">조종/기차/자동차</a>
+            <ul>
+                <li><a href="#E1">변신 장난감</a></li>
+                <li><a href="#E2">조종 장난감</a></li>
+                <li><a href="#E3">수집 장난감</a></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    <div style="margin-left: 20%;">
+        <h1 id="title">장바구니</h1>
+        <p style="font-size: small; color: gray;">최대 5개까지 담을 수 있습니다.</p>
+    </div>
+    <hr>
+    <div id="carts">
+        <table>
+            <% if(count != 0){ %>
+                <tr>
+                    <th>이미지</th>
+                    <th>상품명</th>
+                    <th>수량</th>
+                    <th>금액</th>
+                    <th>배송비</th>
+                    <th>적립 예정</th>
+                    <th></th>
+                </tr>
+                <h1 id="none_cart"></h1>
+                <% for(var i = 0; i < count; i++){ %>
+                    <tr>
+                        <td><a href="/product?id=<%- product_info[i].id %>"><img src="/public/<%- product_info[i].image %>"></a></td>
+                        <td><a href="/product?id=<%- product_info[i].id %>" id="name"><%- product_info[i].name %></a></td>
+                        <td><input type="number" step="any" id="product_count<%= i %>" value="<%- product[i][1] %>" required pattern="[0-9]+" title="주문할 상품의 수량을 입력해주세요." onkeyup="change_count(this.id)">
+                       <input type="hidden" id="<%= i %>" value="<%- product_info[i].id %>">
+                        <button onclick="update_count()" type="submit">수정</button></td>
+                        <td><p id="price"><%- product[i][2]%>원</p></td>
+                        <td><p id="shipping_fee"><%- product_info[i].shipping_fee %>원</p></td>
+                        <td><p id="savings"><%- product[i][4] %>P</p></td>
+                        <td><button onclick="delete_cart(this.id)" id="delete_button<%= i %>">삭제</button></td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <br><br>
+                <h1 id="none_cart">장바구니에 담은 상품이 없습니다.</h1>
+            <% } %>
+        </table>
+    </div>
+    <hr>
+    <br>
+        <div id="total">
+        <h3>합계</h3>
+        <p>상품수량: <span id="total_count"><%- total.count %></span>개</p>
+        <p>총 금액: <span id="total_price"><%- total.price %></span>원</p>
+        <p>배송비: <span id="total_shipping_fee"><%- total.shipping_fee %></span>원</p>
+        <p>적립 예정: <span id="total_savings"><%- total.saving %></span>P</p>
+        <hr>
+        <p>합계 금액: <span id="final_price"><%- total.all_price %></span>원</p>
+        <form action="/order/cart" method="GET">
+            <button id="buy" type="submit" onclick="no_product()">구매</button>
+        </form>
+    </div>
+    <br>
+    <hr style="border: 3px solid gray;"><br>
+    <div id="under">
+        <div class="under_notice">
+            <a href="#">회사소개 </a>|
+            <a href="#">법적고지 </a>|
+            <a href="#">회원약관 </a>|
+            <a href="#">광고/임대문의 </a>|
+            <a href="#" class="im">개인정보처리방침 </a>|
+            <a href="#">윤리경영</a>
+        </div>
+        <br>
+        <div class="info">
+            <p>대표이사: ○○○</p>
+            <p>사업자등록번호: ○○○-○○-○○○</p>
+            <p>고객센터: 1234-5678</p>
+            <p>사업장주소: ○○○○시 ○○구 ○○동 ○○건물 ○층</p>
+        </div>
+    </div>
+</body>
+</html>
