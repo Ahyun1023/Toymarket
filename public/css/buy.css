@@ -1,0 +1,119 @@
+table{
+    border-spacing: 15px;
+    margin-left: 35%;
+    margin-top: 3%;
+}
+
+th{
+    font-size: large;
+}
+
+td img{
+    width: 100px;
+    height: 100px;
+    border-right: 1px solid #DEDEDE;
+}
+
+#info{
+    text-align: left;
+    width: 70em;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+input:not(#radio, #phone_number2, #phone_number3, #remark, #user_phone2, #user_phone3, #receive_address){
+    width: 30em;
+    height: 17.5px;
+    vertical-align: 5px;
+}
+
+#email{
+    width: 100px;
+}
+
+#receive_address{
+    vertical-align: 5px;
+    width: 40em;
+}
+
+#name{
+    font-weight: bolder;
+    color: black;
+    text-decoration: none;
+}
+
+#phone_number1, #user_phone1{
+    vertical-align: 5px;
+}
+
+#phone_number2, #phone_number3, #user_phone2, #user_phone3{
+    vertical-align: 5px;
+    width: 5em;
+}
+
+#remark{
+    width: 50em;
+}
+
+#name:hover{
+    text-decoration-line: underline;
+}
+
+#total{
+    margin-left: 80%;
+    font-weight: bold;
+}
+
+#final{
+    font-size: larger;
+    color: #FF6B6B;
+}
+
+#bold_hr{
+    border: 2px solid black;
+}
+
+#savings_alert{
+    font-size: small;
+    color: #FF6B6B;
+}
+
+#payment{
+    margin-left: 18%;
+}
+
+#final_cal{
+    margin-left: 73%;
+}
+
+#cart_button, #order_button{
+    border: none;
+    padding: 20px 50px;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cart_button{
+    background-color: #C6C6C6;
+
+}
+
+#order_button{
+    background-color: #FF6262;
+}
+
+#final_price{
+    font-size: 40px;
+    font-weight: bolder;
+    color: #47DFE6;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

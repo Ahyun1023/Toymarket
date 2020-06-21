@@ -6,25 +6,25 @@
     <title>ToyMarket</title>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap&subset=korean" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/common.css">
-    <link rel="stylesheet" href="/public/css/sign_log.css">
-    <script src="/public/js/mypage.js" type="text/javascript"></script>
-    <script src="/public/js/change_info.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/public/css/order_success.css">
     <script src="/public/js/common.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
-<body onload="automatic_ci()">
+<body>
     <div id="up_menu">
         <span id="logo"><a href="/public/main.html"><img src="/public/img/logo.png"></a></span>
         <form action="/search/name" method="GET" id="search">
             <input type="text" name="search_word" id="search_word" required>
             <button id="search_button" type="submit">검색</button>
         </form>
-        <span id="up_a_menu">
+        <span id="up_a_menu" style="margin-left: 29.4%;">
             <a href='#' id='logout' onclick='logout()'>로그아웃</a>
-            <a href="#" id="cart" onclick="cart()">장바구니</a>
+            <a href="#" onclick="cart()">장바구니</a>
             <a href='#' id='mypage' onclick="mypage()">마이페이지</a>
-            <form action="/go_cart" method="POST" name="go_cart"></form>
-            <form action="/go_mypage" method="POST" name="go_mypage"></form>
+            <form action="/go_cart" method="POST" name="go_cart">
+            </form>
+            <form action="/go_mypage" method="POST" name="go_mypage">
+            </form>
         </span>
     </div>
     <br><br><br><br><br><br>
@@ -72,63 +72,10 @@
         </li>
     </ul>
     </div>
-    <div class="change_info">
-        <h1>사용자 정보 변경</h1>
-        <p>비밀번호</p>
-        <input type="password" id="password" placeholder="password">
-        <br>
-        <p>비밀번호 재확인</p>
-        <input type="password" id="password_check" placeholder="password_check">
-        <br>
-        <p>전화번호</p>
-        <select id="phone_number1">
-            <option value="010">010</option>
-            <option value="02">02</option>
-            <option value="053">053</option>
-            <option value="052">052</option>
-            <option value="031">031</option>
-        </select>
-        <input type="number" id="phone_number2" oninput="numberMax(this)">
-        <input type="number" id="phone_number3" oninput="numberMax(this)">
-        <br>
-        <p>이메일</p>
-        <input type="text" id="email" placeholder="email">
-        <select id="email_form">
-            <option value="gmail.com">gmail.com</option>
-            <option value="naver.com">naver.com</option>
-            <option value="daum.net">daum.net</option>
-            <option value="nate.com">nate.com</option>
-        </select>
-        <br>
-        <p>주소</p>
-        <input type="text" id="address" placeholder="address">
-        <br>
-        <button type="submit" onclick="change_info()">정보 변경</button>
-        <br><br>
-        <p><a href="/public/signout.html">회원 탈퇴</a></p>
-        <br>
-        <p><a href='#' id='mypage' onclick="mypage()">뒤로 가기</a></p>
-        </form>
-        <br><br>
-    </div>
-    <br>
-    <hr style="border: 3px solid gray;"><br>
-    <div id="under">
-        <div class="under_notice">
-            <a href="#">회사소개 </a>|
-            <a href="#">법적고지 </a>|
-            <a href="#">회원약관 </a>|
-            <a href="#">광고/임대문의 </a>|
-            <a href="#" class="im">개인정보처리방침 </a>|
-            <a href="#">윤리경영</a>
-        </div>
-        <br>
-        <div class="info">
-            <p>대표이사: ○○○</p>
-            <p>사업자등록번호: ○○○-○○-○○○</p>
-            <p>고객센터: 1234-5678</p>
-            <p>사업장주소: ○○○○시 ○○구 ○○동 ○○건물 ○층</p>
-        </div>
+    <div class="order_success">
+        <h1>주문에 성공했습니다.</h1>
+        <button id="mainButton" onclick="location.href='/public/main.html'">메인으로 가기</button>
+        <button id="mypageButton" onclick="mypage()">마이페이지</button>
     </div>
 </body>
 </html>

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700&display=swap&subset=korean" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/common.css">
-    <link rel="stylesheet" href="/public/css/sign_log.css">
+    <link rel="stylesheet" href="/public/css/order_list.css">
     <script src="/public/js/common.js" type="text/javascript"></script>
-    <script src="/public/js/login.js" type="text/javascript"></script>
+    <script src="/public/js/order_list.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <title>ToyMarket</title>
 </head>
@@ -19,8 +19,7 @@
             <button id="search_button" type="submit">검색</button>
         </form>
         <span id="up_a_menu">
-            <a href="/public/signup.html" id="signup">회원가입</a>
-            <a href="/public/login.html" id="login">로그인</a>
+            <a href='#' id='logout' onclick='logout()'>로그아웃</a>
             <a href="#" id="cart" onclick="cart()">장바구니</a>
             <a href='#' id='mypage' onclick="mypage()">마이페이지</a>
             <form action="/go_cart" method="POST" name="go_cart"></form>
@@ -28,6 +27,16 @@
         </span>
     </div>
     <br><br><br><br><br><br>
+    <div id="quick_menu">
+        <span>퀵메뉴</span>
+        <hr style= "border: 2px solid gray;">
+        <span><a href="#" onclick="go_order_list()">주문 목록</a></span>
+        <hr>
+        <span><a href="#" id="cart" onclick="cart()">장바구니</a></span>
+        <hr>
+        <span><a href='#' id='mypage' onclick="mypage()">마이페이지</a></span>
+        <span><button onclick="Go_top()">TOP</button></span>
+    </div>
     <div id="list_menu">
         <ul>
             <li><a href="/search/id?Bid=0">게임</a>
@@ -40,51 +49,62 @@
                 </ul>
             </li>
             <li><a href="#">퍼즐/블록</a>
-            <ul>
-                <li><a href="#B1">레고</a></li>
-                <li><a href="#B2">옥스포드</a></li>
-                <li><a href="#B3">캐릭터 상품</a></li>
-            </ul>
-        </li>
+                <ul>
+                    <li><a href="#B1">레고</a></li>
+                    <li><a href="#B2">옥스포드</a></li>
+                    <li><a href="#B3">캐릭터 상품</a></li>
+                </ul>
+            </li>
             <li><a href="#">인형</a>
-            <ul>
-                <li><a href="#C1">캐릭터 인형</a></li>
-                <li><a href="#C2">봉제 인형</a></li>
-                <li><a href="#C3">피규어</a></li>
-                <li><a href="#C4">작동 인형</a></li>
-                <li><a href="#C5">동물 인형</a></li>
-            </ul>
-        </li>
+                <ul>
+                    <li><a href="#C1">캐릭터 인형</a></li>
+                    <li><a href="#C2">봉제 인형</a></li>
+                    <li><a href="#C3">피규어</a></li>
+                    <li><a href="#C4">작동 인형</a></li>
+                    <li><a href="#C5">동물 인형</a></li>
+                </ul>
+            </li>
             <li><a href="#">야외/스포츠</a>
-            <ul>
-                <li><a href="#D1">공</a></li>
-                <li><a href="#D2">낚시/골프</a></li>
-                <li><a href="#D3">비누방울</a></li>
-                <li><a href="#D4">줄넘기</a></li>
-            </ul>
-        </li>
+                <ul>
+                    <li><a href="#D1">공</a></li>
+                    <li><a href="#D2">낚시/골프</a></li>
+                    <li><a href="#D3">비누방울</a></li>
+                    <li><a href="#D4">줄넘기</a></li>
+                </ul>
+            </li>
             <li><a href="#">조종/기차/자동차</a>
-            <ul>
-                <li><a href="#E1">변신 장난감</a></li>
-                <li><a href="#E2">조종 장난감</a></li>
-                <li><a href="#E3">수집 장난감</a></li>
-            </ul>
-        </li>
-    </ul>
+                <ul>
+                    <li><a href="#E1">변신 장난감</a></li>
+                    <li><a href="#E2">조종 장난감</a></li>
+                    <li><a href="#E3">수집 장난감</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
-    <div class="login">
-        <h1>로그인</h1>
-        <p>아이디</p>
-        <input type="text" id="id" placeholder="ID">
-        <br>
-        <P>비밀번호</P>
-        <input type="password" id="password" placeholder="password">
-        <br>
-        <button type="submit" onclick="login()">로그인</button>
-        <br><br>
-        <a href="/public/signup.html">아직 회원가입하지 않았나요?</a>
+    <br>
+    <h1 id="title">주문 목록</h1>
+    <hr>
+    <br>
+    <div id="order_list">
+        <table id="order_table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>주문번호</th>
+                    <th>주문자</th>
+                    <th>수령자</th>
+                    <th>상품명</th>
+                    <th>결제수단</th>
+                    <th>수량</th>
+                    <th>합계</th>
+                    <th>주문일</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+            </tbody>
+        </table>
     </div>
-    <br><br>
+    <br>
     <hr style="border: 3px solid gray;"><br>
     <div id="under">
         <div class="under_notice">

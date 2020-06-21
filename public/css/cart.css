@@ -1,0 +1,64 @@
+#total{
+    margin-left: 70%;
+}
+
+table{
+    border-spacing: 30px;
+    margin-left: 28%;
+    margin-top: 3%;
+}
+
+th{
+    font-size: large;
+}
+
+td img{
+    width: 100px;
+    height: 100px;
+    border-right: 1px solid #DEDEDE;
+}
+
+#info{
+    text-align: left;
+    width: 70em;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+input{
+    width: 30px;
+    height: 17.5px;
+    vertical-align: 2px;
+}
+
+#name{
+    font-weight: bolder;
+    color: black;
+    text-decoration: none;
+}
+
+#name:hover{
+    text-decoration-line: underline;
+}
+
+#buy{
+    background-color: #FF6262;
+    border: none;
+    padding: 20px 50px;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#none_cart{
+    margin-left: 38%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

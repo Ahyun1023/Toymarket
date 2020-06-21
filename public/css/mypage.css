@@ -1,5 +1,10 @@
-.mypage_menu #f{
-    margin-left: 30%;
+ul,li{
+    list-style:none;
+    text-align: center;
+}
+
+.mypage_menu #f, .mypage_menu #f2{
+    margin-left: 20%;
     float: left;
 }
 
@@ -16,18 +21,69 @@
     text-decoration: underline;
 }
 
+#grade_ex{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .user_info{
     text-align: center;
 }
 
-.order_info, .saw_info{
+.bought_info, .saw_info{
     text-align: center;
 }
 
-.order_info #history, .saw_info #history{
+.bought_info #history, .saw_info #history{
     border: 1px solid black;
     margin-left: 17.6%;
     border-radius: 5px;
     padding: 180px 50px;
     width: 60%;
+}
+
+.user_info #id, .user_info #grade{
+    display: inline;
+}
+
+.saw_info img, .bought_info img{
+    max-width: 200px;
+    max-height: 200px;
+    width: 200px;
+    height: 200px;
+}
+
+#saw_name, #bought_name{
+    text-decoration: none;
+    color: black;
+}
+
+#saw_name:hover, #bought_name:hover{
+    text-decoration: underline;
+}
+
+#history table{
+    margin-left: 21em;
+    width: 500px;
+}
+
+#history #saw_price, #history #bought_price{
+    color: gray;
+    text-decoration: line-through;
+    font-size: small;
+}
+
+#history #saw_sale_price, #history #bought_sale_price{
+    color: red;
+    font-size: large;
+}
+
+#history #saw_shipping_fee, #history #bought_shipping_fee{
+    font-size: small;
+    color: gray;
+}
+
+td, tr{
+    border: 1px solid #E5E5E5;
 }
