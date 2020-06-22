@@ -57,7 +57,7 @@ const update_count = (req, res)=>{
     let saving = 0;
     let num;
     if(common_routes.fnc_check_session(req, result) == 'not_login'){
-        res.render('login_check', {check: false});
+        res.send({result: false});
     } else{
         for(var i = 0; i<5; i++){
             if(req.session.cart_products[i][0] == id){
@@ -97,7 +97,7 @@ const update_count = (req, res)=>{
 const delete_cart = (req, res)=>{
     let result = '';
     if(common_routes.fnc_check_session(req, result) == 'not_login'){
-        res.render('login_check', {check: false});
+        res.send({result: false});
     } else{
         let delete_id = req.body.data;
         req.session.cart_products.splice(delete_id, 1);

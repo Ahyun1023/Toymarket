@@ -12,27 +12,31 @@ const show_product = (req, res)=>{
         if(err){
             console.log(err);
         } else{
-            connection.query('SELECT * FROM product WHERE big_division = ? AND small_division = ? NOT IN(id=?) ORDER BY RAND() LIMIT 4;', [results1[0].big_division, results1[0].small_division, id], (err, results2)=>{
-                if(err){
-                    console.log(err);
-                } else if(req.session.logined == true){
-                    for(var i = 0; i < req.session.saw_products.length; i++){
-                        if(id == req.session.saw_products[i]){
-                            check = false;
-                            break;
+            if(results1.length == 0){
+                res.render('wrong_access', {check: false});
+            } else{
+                connection.query('SELECT * FROM product WHERE big_division = ? AND small_division = ? NOT IN(id=?) ORDER BY RAND() LIMIT 4;', [results1[0].big_division, results1[0].small_division, id], (err, results2)=>{
+                    if(err){
+                        console.log(err);
+                    } else if(req.session.logined == true){
+                        for(var i = 0; i < req.session.saw_products.length; i++){
+                            if(id == req.session.saw_products[i]){
+                                check = false;
+                                break;
+                            }
                         }
-                    }
-                    if(check == true){
-                        if(req.session.saw_products.length == 10){
-                            req.session.saw_products.shift();
+                        if(check == true){
+                            if(req.session.saw_products.length == 10){
+                                req.session.saw_products.shift();
+                            }
+                            req.session.saw_products.push(id);
                         }
-                        req.session.saw_products.push(id);
+                        res.render('product', {result: results1, saving: saving, related: results2});
+                    } else{
+                        res.render('product', {result: results1, saving: saving, related: results2});
                     }
-                    res.render('product', {result: results1, saving: saving, related: results2});
-                } else{
-                    res.render('product', {result: results1, saving: saving, related: results2});
-                }
-            })
+                })
+            }
         }
     })
 }

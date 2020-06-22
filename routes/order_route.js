@@ -2,9 +2,13 @@ const mysql_dbc = require('../DB/db')();
 const connection = mysql_dbc.init();
 
 const product_routes = require('./cart_route');
+const common_routes = require('./common_route');
 
 const order_cart = (req, res)=>{
-    if(req.session.cart_products[0] == 0){
+    let result = '';
+    if(common_routes.fnc_check_session(req, result) == 'not_login'){
+        res.render('login_check', {check: false});
+    } else if(req.session.cart_products[0] == 0){
         product_routes.fnc_cart_Load(req, res);
     } else{
         let em = req.session.email.split('@');
