@@ -20,7 +20,9 @@ const order_cart = (req, res)=>{
             phone3: req.session.phone_number.substring(7, 11),
             email: em[0],
             email_form: em[1],
+            zonecode: req.session.zonecode,
             address: req.session.address,
+            detail_address: req.session.detail_address,
             savings: req.session.savings
         }
         let product = req.session.cart_products;
@@ -53,6 +55,7 @@ const order_cart = (req, res)=>{
                 break;
             }
         }
+        total.all_price += total.shipping_fee;
     
         var sql = "\n";
             sql += "SELECT *\n";
@@ -102,7 +105,9 @@ const order_now = (req, res)=>{
                 phone3: req.session.phone_number.substring(7, 11),
                 email: em[0],
                 email_form: em[1],
+                zonecode: req.session.zonecode,
                 address: req.session.address,
+                detail_address: req.session.detail_address,
                 savings: req.session.savings
             }
     
@@ -111,7 +116,7 @@ const order_now = (req, res)=>{
                     console.log(err);
                 }else {
                     for(var i = 0; i < count; i++) {
-                        total_price += results[0].price;
+                        total_price += results[0].sale_price;
                         total_savings += results[0].saving;
                     }
                     let product = Array(Array());
@@ -124,11 +129,12 @@ const order_now = (req, res)=>{
     
                     let total = {
                         count: count,
-                        price: results[0].price,
+                        price: results[0].sale_price * product[0][1],
                         shipping_fee: results[0].shipping_fee,
                         saving: total_savings,
                         all_price: total_price
                     }
+                    total.all_price += total.shipping_fee;
                     res.render('buy', ({ product: product, user: user, products_id: products_id, product_info: results, count: 1, total: total }));
                 }
             })

@@ -11,7 +11,9 @@ const auto_change_info = (req, res)=>{
         let users = {
             phone_number: req.session.phone_number,
             email: req.session.email,
-            address: req.session.address
+            zonecode: req.session.zonecode,
+            address: req.session.address,
+            detail_address: req.session.detail_address
         }
         users = JSON.stringify(users);
         res.send({result: users});
@@ -170,6 +172,44 @@ const list_load = (req, res)=>{
     })
 }
 
+const success_data = (req, res)=>{
+    let products_id = new Array();
+    connection.query('SELECT * FROM ordered_product WHERE user_id = ? ORDER BY id DESC LIMIT 1;', req.session.user_id, (err, results1)=>{
+        if(err){
+            console.log(err);
+        } else{
+            products_id.push(results1[0].product_id.split(', '));
+            
+            var sql = "\n";
+            sql += "SELECT name\n";
+            sql += "    FROM product\n";
+            sql += "    WHERE id IN(";
+            sql += products_id.join();
+            sql += ") ORDER BY field(id, ";
+            sql += products_id.join();
+            sql += ");";
+
+            connection.query(sql, (err, result)=>{
+                if(err){
+                    console.log(err);
+                } else{
+                    connection.query('SELECT * FROM product ORDER BY RAND() LIMIT 4;', (err, results2) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            results1 = JSON.stringify(results1);
+                            results2 = JSON.stringify(results2);
+                            result = JSON.stringify(result);
+                            res.send({ orderedList: results1, products_name: result, recommend: results2 });
+                        }
+                    })
+                }
+            })
+        }
+    })
+}
+
 module.exports.go_mypage = go_mypage;
 module.exports.auto_change_info = auto_change_info;
 module.exports.list_load = list_load;
+module.exports.success_data = success_data;

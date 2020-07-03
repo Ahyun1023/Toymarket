@@ -39,5 +39,13 @@ const search_id = (req, res)=>{
     }
 }
 
+const search_des = (req, res)=>{
+    let bigDivision = req.query.Bid;
+    let smallDivision = req.query.Sid;
+    console.log(bigDivision);
+    console.log(smallDivision);
+}
+
 module.exports.search_name = search_name;
 module.exports.search_id = search_id;
+module.exports.search_des = search_des;

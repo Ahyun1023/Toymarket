@@ -65,6 +65,7 @@ const update_count = (req, res)=>{
                 break;
             }
         }
+
         connection.query('SELECT sale_price, saving FROM product WHERE id = ?;', id, (err, results)=>{
             if(err){
                 console.log(err);

@@ -17,6 +17,8 @@ const login = (req, res)=>{
         } else{
             if(results == 0){
                 res.send({result: 'fail_1'});
+            } else if(req.session.logined){
+                res.send({result: 'fail_2'});
             } else{
                 req.session.logined = true;
                 req.session.user_id = users.id;
@@ -24,7 +26,9 @@ const login = (req, res)=>{
                 req.session.password = results[0].password;
                 req.session.phone_number = results[0].phone_number;
                 req.session.email = results[0].email;
+                req.session.zonecode = results[0].zonecode;
                 req.session.address = results[0].address;
+                req.session.detail_address = results[0].detail_address;
                 req.session.savings = results[0].savings;
                 req.session.grade = results[0].grade;
                 req.session.use_money = results[0].use_money;
@@ -95,7 +99,8 @@ const change_info = (req, res)=>{
     info.password = crypto.createHash('sha256').update(info.password).digest('hex');
 
     if(common_routes.fnc_check_session(req, result) == 'logined'){
-        connection.query('UPDATE users SET password=?, phone_number=?, email=?, address=? WHERE id=?', [info.password, info.phone_number, info.email, info.address, id], (err, results)=>{
+        connection.query('UPDATE users SET password=?, phone_number=?, email=?, zonecode=?, address=?, detail_address=? WHERE id=?', 
+        [info.password, info.phone_number, info.email, info.zonecode, info.address, info.detail_address, id], (err, results)=>{
             if(err){
                 console.log(err);
                 res.send({error:err});
@@ -103,7 +108,9 @@ const change_info = (req, res)=>{
                 req.session.password = info.password;
                 req.session.phone_number = info.phone_number;
                 req.session.email = info.email;
+                req.session.zonecode = info.zonecode;
                 req.session.address = info.address;
+                req.session.detail_address = info.detail_address;
                 res.send({result: true});
             }
         })

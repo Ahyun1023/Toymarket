@@ -15,7 +15,7 @@ const show_product = (req, res)=>{
             if(results1.length == 0){
                 res.render('wrong_access', {check: false});
             } else{
-                connection.query('SELECT * FROM product WHERE big_division = ? AND small_division = ? NOT IN(id=?) ORDER BY RAND() LIMIT 4;', [results1[0].big_division, results1[0].small_division, id], (err, results2)=>{
+                connection.query('SELECT * FROM product WHERE id NOT IN(?) AND big_division = ? AND small_division = ? ORDER BY RAND() LIMIT 4;', [id, results1[0].big_division, results1[0].small_division], (err, results2)=>{
                     if(err){
                         console.log(err);
                     } else if(req.session.logined == true){
