@@ -10,6 +10,7 @@
     <script src="/public/js/common.js" type="text/javascript"></script>
     <script src="/public/js/buy.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         window.onload = function(){
             automatic_required();
@@ -48,49 +49,48 @@
     <div id="list_menu">
         <ul>
             <li><a href="/search/id?Bid=0">게임</a>
+                <ul>
+                    <li><a href="/search/id?Bid=0&Sid=0">닌텐도 3DS</a></li>
+                    <li><a href="/search/id?Bid=0&Sid=1">닌텐도 스위치</a></li>
+                    <li><a href="/search/id?Bid=0&Sid=2">선불카드</a></li>
+                    <li><a href="/search/id?Bid=0&Sid=3">아미보</a></li>
+                    <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
+                </ul>
+            </li>
+            <li><a href="/search/id?Bid=1">퍼즐/블록</a>
             <ul>
-                <li><a href="/search/id?Bid=0&Sid=0">닌텐도 3DS</a></li>
-                <li><a href="/search/id?Bid=0&Sid=1">닌텐도 스위치</a></li>
-                <li><a href="/search/id?Bid=0&Sid=2">선불카드</a></li>
-                <li><a href="/search/id?Bid=0&Sid=3">아미보</a></li>
-                <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
+                <li><a href="/search/id?Bid=1&Sid=0">레고</a></li>
+                <li><a href="/search/id?Bid=1&Sid=1">옥스포드</a></li>
+                <li><a href="/search/id?Bid=1&Sid=2">캐릭터 상품</a></li>
             </ul>
         </li>
-            <li><a href="#">퍼즐/블록</a>
+            <li><a href="/search/id?Bid=2">인형</a>
             <ul>
-                <li><a href="#B1">레고</a></li>
-                <li><a href="#B2">옥스포드</a></li>
-                <li><a href="#B3">캐릭터 상품</a></li>
+                <li><a href="/search/id?Bid=2&Sid=0">캐릭터 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=1">피규어</a></li>
+                <li><a href="/search/id?Bid=2&Sid=2">작동 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=3">동물 인형</a></li>
             </ul>
         </li>
-            <li><a href="#">인형</a>
+            <li><a href="/search/id?Bid=3">야외/스포츠</a>
             <ul>
-                <li><a href="#C1">캐릭터 인형</a></li>
-                <li><a href="#C2">봉제 인형</a></li>
-                <li><a href="#C3">피규어</a></li>
-                <li><a href="#C4">작동 인형</a></li>
-                <li><a href="#C5">동물 인형</a></li>
+                <li><a href="/search/id?Bid=3&Sid=0">공</a></li>
+                <li><a href="/search/id?Bid=3&Sid=1">낚시/골프</a></li>
+                <li><a href="/search/id?Bid=3&Sid=2">비눗방울</a></li>
+                <li><a href="/search/id?Bid=3&Sid=3">줄넘기</a></li>
             </ul>
         </li>
-            <li><a href="#">야외/스포츠</a>
+            <li><a href="/search/id?Bid=4">조종/기차/자동차</a>
             <ul>
-                <li><a href="#D1">공</a></li>
-                <li><a href="#D2">낚시/골프</a></li>
-                <li><a href="#D3">비누방울</a></li>
-                <li><a href="#D4">줄넘기</a></li>
-            </ul>
-        </li>
-            <li><a href="#">조종/기차/자동차</a>
-            <ul>
-                <li><a href="#E1">변신 장난감</a></li>
-                <li><a href="#E2">조종 장난감</a></li>
-                <li><a href="#E3">수집 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=0">변신 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=1">조종 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=2">수집 장난감</a></li>
             </ul>
         </li>
     </ul>
     </div>
     <div>
-        <table>
+        <table id="products_table">
             <tr>
                 <th>이미지</th>
                 <th>상품명</th>
@@ -180,7 +180,14 @@
                 <td>받으실 주소</td>
             </tr>
             <tr>
-                <td><input type="text" id="receive_address" value="<%- user.address %>" id="receive_address"></td>
+                <td>
+                    <p>
+                        <input type="text" value="<%- user.zonecode %>" id="zonecode">
+                        <button onclick="search_address()">주소 찾기</button>
+                    </p>
+                    <p><input type="text" value="<%- user.address %>" id="address"></p>
+                    <p><input type="text" value="<%- user.detail_address %>" id="detail_address"></p>
+                </td>
             </tr>
             <tr>
                 <td>전화 번호</td>
@@ -211,11 +218,10 @@
     <hr id="bold_hr">
     <div id="payment_info">
         <table>
-            <tr><td>상품 합계 금액: <span id="before_price"><%- total.price %></span>원</td></tr>
-            <tr><td>배송비: <%- total.shipping_fee %>원</td></tr>
+            <tr><td>상품 합계 금액: <span id="before_price"><%- total.all_price %></span>원</td></tr>
             <tr><td>적립금 사용: <input type="number" id="use_saving" onkeyup="check_savings()" value="0">P</td></tr>
             <tr><td id="savings_alert">*<span id="have_saving"><%- user.savings %></span>P 만큼 사용 가능합니다.</td></tr>
-            <tr><td>최종 결제 금액: <span id="after_price"><%- total.price %></span>원</td></tr>
+            <tr><td>최종 결제 금액: <span id="after_price"><%- total.all_price %></span>원</td></tr>
         </table>
     </div>
     <h3>결제 수단 선택</h3>
@@ -254,10 +260,10 @@
         </div>
         <br>
         <div class="info">
-            <p>대표이사: ○○○</p>
-            <p>사업자등록번호: ○○○-○○-○○○</p>
+            <p>대표이사: 도롱이</p>
+            <p>사업자등록번호: 020-21-401</p>
             <p>고객센터: 1234-5678</p>
-            <p>사업장주소: ○○○○시 ○○구 ○○동 ○○건물 ○층</p>
+            <p>사업장주소: 대구광역시 달성군 구지면 감자타워 1층</p>
         </div>
     </div>
 </body>
