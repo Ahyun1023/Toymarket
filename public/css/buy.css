@@ -4,6 +4,10 @@ table{
     margin-top: 3%;
 }
 
+#products_table{
+    text-align: center;
+}
+
 th{
     font-size: large;
 }
@@ -11,7 +15,7 @@ th{
 td img{
     width: 100px;
     height: 100px;
-    border-right: 1px solid #DEDEDE;
+    border: 1px solid gray;
 }
 
 #info{
@@ -20,10 +24,14 @@ td img{
     border-bottom: 1px solid #DEDEDE;
 }
 
-input:not(#radio, #phone_number2, #phone_number3, #remark, #user_phone2, #user_phone3, #receive_address){
+input:not(#radio, #phone_number2, #phone_number3, #remark, #user_phone2, #user_phone3){
     width: 30em;
     height: 17.5px;
     vertical-align: 5px;
+}
+
+#address{
+    width: 30em;
 }
 
 #email{

@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="/public/css/common.css">
     <link rel="stylesheet" href="/public/css/order_success.css">
     <script src="/public/js/common.js" type="text/javascript"></script>
+    <script src="/public/js/success.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
     <div id="up_menu">
-        <span id="logo"><a href="/public/main.html"><img src="/public/img/logo.png"></a></span>
+        <span id="logo"><a href="/public/main.html"><img src="/public/img/logo.png" id="a"></a></span>
         <form action="/search/name" method="GET" id="search">
             <input type="text" name="search_word" id="search_word" required>
             <button id="search_button" type="submit">검색</button>
@@ -39,43 +40,87 @@
                     <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
                 </ul>
             </li>
-            <li><a href="#">퍼즐/블록</a>
+            <li><a href="/search/id?Bid=1">퍼즐/블록</a>
             <ul>
-                <li><a href="#B1">레고</a></li>
-                <li><a href="#B2">옥스포드</a></li>
-                <li><a href="#B3">캐릭터 상품</a></li>
+                <li><a href="/search/id?Bid=1&Sid=0">레고</a></li>
+                <li><a href="/search/id?Bid=1&Sid=1">옥스포드</a></li>
+                <li><a href="/search/id?Bid=1&Sid=2">캐릭터 상품</a></li>
             </ul>
         </li>
-            <li><a href="#">인형</a>
+            <li><a href="/search/id?Bid=2">인형</a>
             <ul>
-                <li><a href="#C1">캐릭터 인형</a></li>
-                <li><a href="#C2">봉제 인형</a></li>
-                <li><a href="#C3">피규어</a></li>
-                <li><a href="#C4">작동 인형</a></li>
-                <li><a href="#C5">동물 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=0">캐릭터 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=1">피규어</a></li>
+                <li><a href="/search/id?Bid=2&Sid=2">작동 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=3">동물 인형</a></li>
             </ul>
         </li>
-            <li><a href="#">야외/스포츠</a>
+            <li><a href="/search/id?Bid=3">야외/스포츠</a>
             <ul>
-                <li><a href="#D1">공</a></li>
-                <li><a href="#D2">낚시/골프</a></li>
-                <li><a href="#D3">비누방울</a></li>
-                <li><a href="#D4">줄넘기</a></li>
+                <li><a href="/search/id?Bid=3&Sid=0">공</a></li>
+                <li><a href="/search/id?Bid=3&Sid=1">낚시/골프</a></li>
+                <li><a href="/search/id?Bid=3&Sid=2">비눗방울</a></li>
+                <li><a href="/search/id?Bid=3&Sid=3">줄넘기</a></li>
             </ul>
         </li>
-            <li><a href="#">조종/기차/자동차</a>
+            <li><a href="/search/id?Bid=4">조종/기차/자동차</a>
             <ul>
-                <li><a href="#E1">변신 장난감</a></li>
-                <li><a href="#E2">조종 장난감</a></li>
-                <li><a href="#E3">수집 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=0">변신 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=1">조종 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=2">수집 장난감</a></li>
             </ul>
         </li>
     </ul>
     </div>
     <div class="order_success">
         <h1>주문에 성공했습니다.</h1>
+        <br>
+        <table id="order_table">
+            <thead>
+                <tr>
+                    <th>주문번호</th>
+                    <th>주문자</th>
+                    <th>수령자</th>
+                    <th>상품명</th>
+                    <th>결제수단</th>
+                    <th>수량</th>
+                    <th>합계</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="order_list">
+            </tbody>
+        </table>
+        <br>
         <button id="mainButton" onclick="location.href='/public/main.html'">메인으로 가기</button>
         <button id="mypageButton" onclick="mypage()">마이페이지</button>
+        <br>
+        <div id="recommend">
+            <h2>이런 상품은 어떠신가요?</h2>
+            <table id="recommend_table">
+                <tbody id="recommend_list">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <hr style="border: 3px solid gray;"><br>
+    <div id="under">
+        <div class="under_notice">
+            <a href="#">회사소개 </a>|
+            <a href="#">법적고지 </a>|
+            <a href="#">회원약관 </a>|
+            <a href="#">광고/임대문의 </a>|
+            <a href="#" class="im">개인정보처리방침 </a>|
+            <a href="#">윤리경영</a>
+        </div>
+        <br>
+        <div class="info">
+            <p>대표이사: 도롱이</p>
+            <p>사업자등록번호: 020-21-401</p>
+            <p>고객센터: 1234-5678</p>
+            <p>사업장주소: 대구광역시 달성군 구지면 감자타워 1층</p>
+        </div>
     </div>
 </body>
 </html>

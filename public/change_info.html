@@ -11,6 +11,7 @@
     <script src="/public/js/change_info.js" type="text/javascript"></script>
     <script src="/public/js/common.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body onload="automatic_ci()">
     <div id="up_menu">
@@ -39,35 +40,33 @@
                     <li><a href="/search/id?Bid=0&Sid=4">기타</a></li>
                 </ul>
             </li>
-            <li><a href="#">퍼즐/블록</a>
+            <li><a href="/search/id?Bid=1">퍼즐/블록</a>
             <ul>
-                <li><a href="#B1">레고</a></li>
-                <li><a href="#B2">옥스포드</a></li>
-                <li><a href="#B3">캐릭터 상품</a></li>
+                <li><a href="/search/id?Bid=1&Sid=0">레고</a></li>
+                <li><a href="/search/id?Bid=1&Sid=1">옥스포드</a></li>
             </ul>
         </li>
-            <li><a href="#">인형</a>
+            <li><a href="/search/id?Bid=2">인형</a>
             <ul>
-                <li><a href="#C1">캐릭터 인형</a></li>
-                <li><a href="#C2">봉제 인형</a></li>
-                <li><a href="#C3">피규어</a></li>
-                <li><a href="#C4">작동 인형</a></li>
-                <li><a href="#C5">동물 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=0">캐릭터 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=1">피규어</a></li>
+                <li><a href="/search/id?Bid=2&Sid=2">작동 인형</a></li>
+                <li><a href="/search/id?Bid=2&Sid=3">동물 인형</a></li>
             </ul>
         </li>
-            <li><a href="#">야외/스포츠</a>
+            <li><a href="/search/id?Bid=3">야외/스포츠</a>
             <ul>
-                <li><a href="#D1">공</a></li>
-                <li><a href="#D2">낚시/골프</a></li>
-                <li><a href="#D3">비누방울</a></li>
-                <li><a href="#D4">줄넘기</a></li>
+                <li><a href="/search/id?Bid=3&Sid=0">공</a></li>
+                <li><a href="/search/id?Bid=3&Sid=1">낚시/골프</a></li>
+                <li><a href="/search/id?Bid=3&Sid=2">비눗방울</a></li>
+                <li><a href="/search/id?Bid=3&Sid=3">줄넘기</a></li>
             </ul>
         </li>
-            <li><a href="#">조종/기차/자동차</a>
+            <li><a href="/search/id?Bid=4">조종/기차/자동차</a>
             <ul>
-                <li><a href="#E1">변신 장난감</a></li>
-                <li><a href="#E2">조종 장난감</a></li>
-                <li><a href="#E3">수집 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=0">변신 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=1">조종 장난감</a></li>
+                <li><a href="/search/id?Bid=4&Sid=2">수집 장난감</a></li>
             </ul>
         </li>
     </ul>
@@ -75,6 +74,7 @@
     <div class="change_info">
         <h1>사용자 정보 변경</h1>
         <p>비밀번호</p>
+        <p style="color: gray; font-size: 8px;">8~16까지의 영문, 숫자 허용</p>
         <input type="password" id="password" placeholder="password">
         <br>
         <p>비밀번호 재확인</p>
@@ -101,7 +101,12 @@
         </select>
         <br>
         <p>주소</p>
-        <input type="text" id="address" placeholder="address">
+        <p>
+            <input type="text" id="zonecode" placeholder="우편번호" readonly>
+            <button onclick="search_address()">주소 찾기</button>
+        </p>
+        <p><input type="text" id="address" placeholder="기본 주소" readonly></p>
+        <p><input type="text" id="detail_address" placeholder="상세 주소"></p>
         <br>
         <button type="submit" onclick="change_info()">정보 변경</button>
         <br><br>
@@ -124,10 +129,10 @@
         </div>
         <br>
         <div class="info">
-            <p>대표이사: ○○○</p>
-            <p>사업자등록번호: ○○○-○○-○○○</p>
+            <p>대표이사: 도롱이</p>
+            <p>사업자등록번호: 020-21-401</p>
             <p>고객센터: 1234-5678</p>
-            <p>사업장주소: ○○○○시 ○○구 ○○동 ○○건물 ○층</p>
+            <p>사업장주소: 대구광역시 달성군 구지면 감자타워 1층</p>
         </div>
     </div>
 </body>

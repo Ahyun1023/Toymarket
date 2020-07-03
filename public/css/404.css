@@ -1,0 +1,42 @@
+#error{
+    text-align: center;
+    margin-top: 10%;
+}
+
+#main, #page{
+    margin-right: 5%;
+    padding: 20px 50px;
+    margin: 60px;
+    border: none;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2%;
+}
+
+#main{
+    background-color: #9B58BA;
+
+}
+
+#main:hover{
+    background-color: #874DA2;
+}
+
+#page{
+    background-color: #C4C4C4;
+}
+
+#page:hover{
+    background-color: gray;
+}
+
+#errorTitle{
+    color: #9B58BA;
+    font-weight: bold;
+    font-size: large;
+}
