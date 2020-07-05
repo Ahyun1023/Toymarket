@@ -1,0 +1,33 @@
+table{
+    width:75%;
+    margin-right: 30%;
+    border-collapse: collapse;
+}
+#order_list{
+    margin-left: 20%;
+}
+
+#title{
+    margin-left: 20%;
+}
+
+#order_table{
+    border-spacing: 10px;
+}
+
+th, td{
+    border: 1px solid black;
+    text-align: center;
+}
+
+th{
+    background-color: #D6F6C1;
+}
+
+tbody tr:nth-child(2n){
+    background-color: #E5C1F6;
+}
+
+tbody tr:nth-child(2n+1){
+    background-color: #F6D7FF;
+}
