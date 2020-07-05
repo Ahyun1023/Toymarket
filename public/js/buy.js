@@ -99,7 +99,7 @@ function order(){
     } else if(all_data.user_name == '' || blank_check.test(all_data.user_name) == true){
         alert('주문자 정보에 이름을 입력해주세요.');
         return;
-    } else if(all_data.user_email == '' || blank_check.test(all_data.user_email) == true){
+    } else if($('#user_email').val() == '' || blank_check.test(all_data.user_email) == true){
         alert('주문자 정보에 이메일을 입력해주세요.');
         return;
     } else if(all_data.payments == undefined){
