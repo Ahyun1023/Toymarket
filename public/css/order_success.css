@@ -1,0 +1,65 @@
+img:not(#a){
+    width: 200px;
+    height: auto;
+}
+.order_success{
+    text-align: center;
+    border: 1px solid black;
+    border-radius:10px;
+    width: 60%;
+    margin-left: 22%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#mainButton, #mypageButton{
+    border: none;
+    padding: 20px 50px;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#mainButton{
+    background-color: #FF6262;
+    color: white;
+}
+
+#mypageButton{
+    background-color: #C1F5F6;
+    color: black;
+}
+
+#order_table{
+    margin-left: 20%;
+    border-collapse: collapse;
+}
+
+#order_table td, th{
+    border: 1px solid black;
+}
+
+#recommend_table{
+    text-align: center;
+    margin-left: 13%;
+}
+
+#recommend_table #related_title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 10em;
+    margin-left: 15px;
+}
+
+#recommend_table a{
+    color: black;
+    text-decoration: none;
+}
+
+#recommend_table a:hover{
+    text-decoration: underline;
+}
