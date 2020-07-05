@@ -23,6 +23,7 @@ const auto_change_info = (req, res)=>{
 const go_mypage = (req, res)=>{
     let users = {
         id: req.session.user_id,
+        name: req.session.name,
         grade: req.session.grade,
         savings: req.session.savings
     }
