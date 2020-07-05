@@ -1,4 +1,4 @@
-.signup, .login, .change_info{
+.signup, .login, .change_info, .signout{
     text-align: center;
     border: 1px solid black;
     border-radius:10px;
@@ -19,23 +19,51 @@
 
 .change_info{
     margin-top: 2%;
-    margin-left: 20%;
+    margin-left: 18%;
     padding: 50px;
 }
 
-.signup input, .login input, .change_info input{
-    width: 30%;
+.signout{
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-bottom: 5%;
+}
+.signup input, .login input, .change_info input, .signout input{
+    width: 25%;
     padding: 15px 20px;
     margin: 8px 0;
 }
 
-.signup button, .login button, .change_info button{
+.signup button, .login button, .change_info button, .signout button{
     padding: 15px 30px;
     margin-top: 30px;
     background-color: #BCFFC0;
     border: none;
 }
 
-.signup button:hover, .login button:hover, .change_info button:hover{
+.signup button:hover, .login button:hover, .change_info button:hover, .signout button:hover{
     background-color: #B2EDB6;
+}
+
+.signup #phone_number2, .signup #phone_number3, .change_info #phone_number2, .change_info #phone_number3{
+    width: 10%;
+}
+.signup #phone_number1, .change_info #phone_number1{
+    width: 10%;
+    padding: 15px 20px;
+}
+
+.signup #email, .change_info #email{
+    width: 10%;
+}
+
+.signup #email_form, .change_info #email_form{
+    width: 20%;
+    padding: 15px 30px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
 }
