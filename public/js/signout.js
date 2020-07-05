@@ -32,9 +32,11 @@ function signout(){
                                 if(result.result == true){
                                     alert('성공적으로 회원 탈퇴되었습니다.');
                                     location.href = './main.html';
-                                } else{
+                                } else if(result.result == 'not_login'){
                                     alert('로그인이 필요한 서비스입니다.');
                                     location.href = '/public/login.html';
+                                } else if(result.result == 'not_match'){
+                                    alert('아이디 혹은 비밀번호가 틀렸습니다.');
                                 }
                                 
                             }
