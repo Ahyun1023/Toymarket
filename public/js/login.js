@@ -19,7 +19,6 @@ function login(){
                 },
                 success: (result)=>{
                     if(result.result == 'success'){
-                        alert('로그인 성공! 메인 화면으로 돌아갑니다.');
                         location.href = './main.html';
                     } else if(result.result == 'fail_1'){
                         alert('아이디 혹은 비밀번호가 틀렸습니다.');
