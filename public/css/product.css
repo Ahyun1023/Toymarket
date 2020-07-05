@@ -1,0 +1,135 @@
+#product_info{
+    padding: 8em 20em 0px 60em;
+}
+
+#product_img{
+    float: left;
+    margin-left: 13%;
+    margin-top: 20px;
+    width: 550px;
+    height: 550px;
+    max-width: 550px;
+    max-height: 550px;
+}
+
+#product_info #product_name{
+    font-size: large;
+}
+
+#product_info table{
+    width: 80%;
+    padding: 10px;
+}
+
+#shipping_fee{
+    float: left;
+}
+
+#product_info #price{
+    color: gray;
+    text-decoration: line-through;
+}
+
+#product_info #sale{
+    color: red;
+}
+
+#product_info th, #product_info td{
+    padding: 10px;
+}
+
+#product_info #product_name{
+    display: inline;
+    padding: 0px 35px;
+}
+
+#product_info #product_count{
+    width: 50%;
+    padding: 10px 1px;
+}
+
+#product_info input[type=number]{
+    line-height: 25px;
+}
+
+#product_info #total_price{
+    font-size: larger;
+    color: #EE705C;
+}
+
+#total td{
+    border: 1px solid black;
+}
+
+#total{
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+#add_to_cart{
+    background-color: #9B9B9B;
+    border: none;
+    padding: 20px 30px;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 5em;
+    cursor: pointer;
+}
+
+#buy_now{
+    background-color: #FF6262;
+    border: none;
+    padding: 20px 30px;
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#related_product h1{
+    margin-left: 10%;
+}
+
+#related_product img{
+    border: 1px solid #DEDEDE;
+    width: 300px;
+    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    margin-left: 9em;
+}
+
+#related_product p{
+    margin-left: 50%;
+}
+
+#r1, #r2, #r3, #r4{
+    text-decoration: none;
+    color: black;
+}
+
+#r1:hover, #r2:hover, #r3:hover, #r4:hover{
+    text-decoration: underline;
+}
+
+ #related_title{
+     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 10em;
+    margin-left: 15px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
