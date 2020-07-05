@@ -62,21 +62,26 @@ function add_to_cart(){
 function now_check(){
     let count = $('#product_count').val();
     let id = $('#product_id').text();
-    $(document).ready(()=>{
-        $.ajax({
-            url: '/check_session_count',
-            type: 'POST',
-            dataType: 'json',
-            data: {count: count, id: id},
-            success: (result)=>{
-                console.log(result);
-                if(result.count == false){
-                    alert('상품은 1개에서 5개의 상품만 구매할 수 있습니다.');
-                } else{
-                    document.order_now.action = "/order/now";
-                    document.order_now.submit();
+
+    if(count == ''){
+        alert('구매할 상품의 수량을 입력해주세요.');
+    } else{
+        $(document).ready(()=>{
+            $.ajax({
+                url: '/check_session_count',
+                type: 'POST',
+                dataType: 'json',
+                data: {count: count, id: id},
+                success: (result)=>{
+                    console.log(result);
+                    if(result.count == false){
+                        alert('상품은 1개에서 5개의 상품만 구매할 수 있습니다.');
+                    } else if(result.count == true){
+                        document.order_now.action = "/order/now";
+                        document.order_now.submit();
+                    }
                 }
-            }
+            })
         })
-    })
+    }
 }
