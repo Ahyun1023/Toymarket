@@ -4,6 +4,7 @@ const connection = mysql_dbc.init();
 const crypto = require('crypto');
 
 const common_routes = require('./common_route');
+const { deepEqual } = require('assert');
 
 
 const login = (req, res)=>{
@@ -73,21 +74,27 @@ const signout = (req, res)=>{
     let result = '';
     let users = req.body.data;
     users = JSON.parse(users);
+    users.password = crypto.createHash('sha256').update(users.password).digest('hex');
 
     if(common_routes.fnc_check_session(req, result) == 'logined'){
-        connection.query('DELETE FROM users WHERE id = ?;', users.id, (err) => {
-            if (err) {
-                console.log(err);
-                res.send({ error: err });
-            } else {
-                req.session.destroy(() => {
-                    res.send({result: true});
-                })
-
-            }
-        })
+        if(req.session.user_id == users.id && req.session.password == users.password){
+            var sql = 'DELETE users, ordered_product FROM users INNER JOIN ordered_product WHERE users.id = ordered_product.user_id AND ordered_product.user_id = ?;';
+            connection.query(sql, users.id, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.send({ error: err });
+                } else {
+                    req.session.destroy(() => {
+                        res.send({result: true});
+                    })
+    
+                }
+            })
+        } else{
+            res.send({result: 'not_match'});
+        }
     } else{
-        res.send({result: false});
+        res.send({result: 'not_login'});
     }
 }
 
