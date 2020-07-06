@@ -14,13 +14,13 @@ const check_session_count = (req, res)=>{
     let result = '';
     let count = req.body.count;
     if(fnc_check_session(req, result) == 'logined'){
-        if(count <= 0 || count > 6){
+        if(count <= 0 || count > 5){
             res.send({result: 'logined', count: false});
         } else{
             res.send({result: 'logined', count: true});
         }
     } else{
-        res.render('login_check', {check: false});
+        res.send({result: 'not_login', count: false});
     }
 }
 
