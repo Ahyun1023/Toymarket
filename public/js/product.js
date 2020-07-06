@@ -66,6 +66,7 @@ function now_check(){
     if(count == ''){
         alert('구매할 상품의 수량을 입력해주세요.');
     } else{
+        count = parseInt(count);
         $(document).ready(()=>{
             $.ajax({
                 url: '/check_session_count',
@@ -73,12 +74,16 @@ function now_check(){
                 dataType: 'json',
                 data: {count: count, id: id},
                 success: (result)=>{
-                    console.log(result);
-                    if(result.count == false){
-                        alert('상품은 1개에서 5개의 상품만 구매할 수 있습니다.');
-                    } else if(result.count == true){
-                        document.order_now.action = "/order/now";
-                        document.order_now.submit();
+                    if(result.result == 'logined'){
+                        if(result.count == false){
+                            alert('상품은 1개에서 5개의 상품만 구매할 수 있습니다.');
+                        } else{
+                            document.order_now.action = "/order/now";
+                            document.order_now.submit();
+                        }
+                    } else{
+                        alert('로그인이 필요한 서비스입니다.');
+                        location.href = '/public/login.html';
                     }
                 }
             })
