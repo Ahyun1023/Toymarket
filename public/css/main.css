@@ -34,17 +34,10 @@ td img{
     text-decoration: underline;
 }
 
-#banner_ad .ad1{
-    margin-left: 2%;
-    float: left;
-}
-
-#banner_ad .ad2{
-    margin-left: 3px;
-}
-
-#review_content1, #review_content2, #review_content3, #review_content4{
-    color: gray;
+.ad{
+  margin-left: 5%;
+  width: 1700px;
+  height: 500px;
 }
 
 #user_name1, #user_name2, #user_name3, #user_name4{
