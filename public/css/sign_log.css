@@ -1,3 +1,7 @@
+#up_a_menu{
+    margin-left: 29.4%;
+}
+
 .signup, .login, .change_info, .signout{
     text-align: center;
     border: 1px solid black;
