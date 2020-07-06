@@ -28,6 +28,15 @@ function resetSavings(before_price){
     $('#final_price').text(before_price);
 }
 
+function all_savings_use(){
+    let before_price = $('#before_price').text();
+    let have_saving = $('#have_saving').text();
+    $('#use_saving').val(have_saving);
+
+    $('#after_price').text(before_price - have_saving);
+    $('#final_price').text(before_price - have_saving);
+}
+
 function order(){
     let user_phone1 = $('#user_phone1').val();
     let user_phone2 = $('#user_phone2').val();
@@ -79,7 +88,7 @@ function order(){
     }
 
     if(etc_data.use_savings == ''){
-        etc_data.use_savings = 0;
+        alert('사용할 적립금의 금액을 정확히 입력해주세요.');
     }
 
     let total_savings = parseInt(etc_data.savings) - parseInt(etc_data.use_savings);

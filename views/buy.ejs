@@ -220,6 +220,7 @@
         <table>
             <tr><td>상품 합계 금액: <span id="before_price"><%- total.all_price %></span>원</td></tr>
             <tr><td>적립금 사용: <input type="number" id="use_saving" onkeyup="check_savings()" value="0">P</td></tr>
+            <tr><td><button onclick="all_savings_use()">적립금 전부 사용</button></td></tr>
             <tr><td id="savings_alert">*<span id="have_saving"><%- user.savings %></span>P 만큼 사용 가능합니다.</td></tr>
             <tr><td>최종 결제 금액: <span id="after_price"><%- total.all_price %></span>원</td></tr>
         </table>
