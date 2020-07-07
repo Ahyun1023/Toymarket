@@ -1,4 +1,5 @@
 function signup(){
+    let special_check = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
     let kor_check =  /^[A-Za-z0-9]+$/; 
     let blank_check = /[\s]/g;
     let phone_number1 = $('#phone_number1').val();
@@ -34,8 +35,8 @@ function signup(){
     } else if(!kor_check.test(user.id) || !kor_check.test(user.password)){
         alert('아이디나 비밀번호에는 영문과 숫자만 입력할 수 있습니다.');
         return;
-    } else if(kor_check.test(user.name) || user.name.length < $('#name').attr('minlength') || blank_check.test(user.name) == true){
-        alert('이름은 2에서 8까지의 한글만 입력할 수 있습니다.');
+    } else if(kor_check.test(user.name) || user.name.length < $('#name').attr('minlength') || blank_check.test(user.name) == true || special_check.test(user.name)){
+        alert('이름은 공백을 입력할 수 없으며 2에서 8까지의 한글만 입력할 수 있습니다.');
         return;
     } else if(user.password != user.password_check){
         alert('비밀번호가 틀렸습니다.');
@@ -45,6 +46,9 @@ function signup(){
         return;
     }else if(blank_check.test($('#email').val()) == true){
         alert('이메일에 공백은 입력할 수 없습니다.');
+        return;
+    }else if(blank_check.test($('#email').val()) == true || !kor_check.test($('#email').val())){
+        alert('올바른 이메일을 입력해주세요.');
         return;
     } else if(email_form == ''){
         alert('이메일 형식을 선택해주세요.');

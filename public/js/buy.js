@@ -45,9 +45,12 @@ function order(){
     let receive_phone2 = $('#phone_number2').val();
     let receive_phone3 = $('#phone_number3').val();
     let date = new Date();
+    let date_mon = parseInt(date.getMonth() + 1);
     let product_id = new Array();
     let count = new Array();
     let blank_check = /[\s]/g;
+    let kor_check =  /^[A-Za-z0-9]+$/; 
+    let special_check = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 
     for(var i = 0; i < $('#count').val(); i++){
         count.push($('#count' + i).text().substr(0, 1));
@@ -77,7 +80,7 @@ function order(){
         remark: $('#remark').val(),
         payments: $('input[name="payments"]:checked').val(),
         all_price: $('#final_price').text(),
-        date: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
+        date: date.getFullYear() + '-' + String(date_mon) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
         product_id: product_id,
         count: count
     }
@@ -92,26 +95,23 @@ function order(){
     }
 
     let total_savings = parseInt(etc_data.savings) - parseInt(etc_data.use_savings);
-
-    if(receive_phone2 == '' || receive_phone3 == '' || blank_check.test(receive_phone2) == true || blank_check.test(receive_phone3) == true){
-        alert('배송 정보에 전화 번호를 입력해주세요');
+    if(user_phone2 == '' || user_phone3 == '' || blank_check.test(user_phone2) == true || blank_check.test(user_phone3) == true){
+        alert('주문자 정보에 전화 번호를 입력해주세요');
         return;
-    }  else if(all_data.order_name == '' || blank_check.test(all_data.order_name) == true){
-        alert('배송 정보에 이름을 입력해주세요.');
+    } else if($('#user_email').val() == '' || blank_check.test($('#user_email').val()) == true || !kor_check.test($('#user_email').val())){
+        alert('주문자 정보에 이메일을 정확히 입력해주세요.');
+        return;
+    } else if(receive_phone2 == '' || receive_phone3 == '' || phone_number2 < 99 || phone_number3 < 999){
+        alert('배송 정보에 정확한 전화 번호를 입력해주세요');
+        return;
+    }  else if(all_data.order_name == '' || all_data.order_name.length < $('#name').attr('minlength') ||
+     blank_check.test(all_data.order_name) == true || kor_check.test(all_data.order_name) || special_check.test(all_data.order_name)){
+        alert('배송 정보에 이름을 정확히 입력해주세요.');
         return;
     } else if(all_data.order_address == '' || blank_check.test(all_data.order_address) == true){
         alert('배송 정보에 주소를 입력해주세요.');
         return;
-    } else if(user_phone2 == '' || user_phone3 == '' || blank_check.test(user_phone2) == true || blank_check.test(user_phone3) == true){
-        alert('주문자 정보에 전화 번호를 입력해주세요');
-        return;
-    } else if(all_data.user_name == '' || blank_check.test(all_data.user_name) == true){
-        alert('주문자 정보에 이름을 입력해주세요.');
-        return;
-    } else if($('#user_email').val() == '' || blank_check.test(all_data.user_email) == true){
-        alert('주문자 정보에 이메일을 입력해주세요.');
-        return;
-    } else if(all_data.payments == undefined){
+    }  else if(all_data.payments == undefined){
         alert('결제 수단을 선택해주세요.');
         return;
     } else if($("input:checkbox[id='check']").is(':checked') == false){

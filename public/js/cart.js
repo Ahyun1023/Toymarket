@@ -9,8 +9,6 @@ function change_count(id){
 function update_count(){
     let count = document.getElementById(change_count_count).value;
     let id = document.getElementById(change_count_id).value;
-    //let count = $('#change_count_count').val();
-    //let id = $('#change_count_id').val();
 
     if(count == ''){
         alert('구매하려는 상품의 수량을 입력해주세요.');

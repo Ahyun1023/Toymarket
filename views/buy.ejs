@@ -130,7 +130,7 @@
                 <td>주문하시는 분</td>
             </tr>
             <tr>
-                <td><input type="text" id="user_name" value="<%- user.name %>" readonly style="cursor: not-allowed;"></td>
+                <td><input type="text" id="user_name" value="<%- user.name %>" readonly style="cursor: not-allowed;" minlength="2" maxlength="8"></td>
             </tr>
             <tr>
                 <td>전화 번호</td>
@@ -154,7 +154,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="user_email" placeholder="email" value="<%- user.email %>">@
+                    <input type="text" id="user_email" placeholder="email" value="<%- user.email %>" maxlength="15">@
                     <select id="email_form">
                         <option value="<%- user.email_form %>"><%- user.email_form %></option>
                         <option value="gmail.com">gmail.com</option>
@@ -174,7 +174,7 @@
                 <td>받으실 분</td>
             </tr>
             <tr>
-                <td><input type="text" id="receiver" value="<%- user.name %>"></td>
+                <td><input type="text" id="receiver" value="<%- user.name %>" minlength="2" maxlength="8"></td>
             </tr>
             <tr>
                 <td>받으실 주소</td>
@@ -186,7 +186,7 @@
                         <button onclick="search_address()">주소 찾기</button>
                     </p>
                     <p><input type="text" value="<%- user.address %>" id="address" readonly></p>
-                    <p><input type="text" value="<%- user.detail_address %>" id="detail_address"></p>
+                    <p><input type="text" value="<%- user.detail_address %>" id="detail_address" maxlength="10"></p>
                 </td>
             </tr>
             <tr>
@@ -210,7 +210,7 @@
                 <td>남기실 말씀</td>
             </tr>
             <tr>
-                <td><input type="text" name="remark" id="remark"></td>
+                <td><input type="text" name="remark" id="remark" maxlength="30"></td>
             </tr>
         </table>
     </div>

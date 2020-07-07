@@ -91,6 +91,10 @@
         <input type="number" id="phone_number2" oninput="numberMax(this)">
         <input type="number" id="phone_number3" oninput="numberMax(this)">
         <br>
+        <p>이름</p>
+        <p style="color: gray; font-size: 8px;">2~8까지의 한글 허용</p>
+        <input type="text" id="name" placeholder="name" minlength="2" maxlength="8">
+        <br>
         <p>이메일</p>
         <input type="text" id="email" placeholder="email">
         <select id="email_form">
@@ -106,7 +110,7 @@
             <button onclick="search_address()">주소 찾기</button>
         </p>
         <p><input type="text" id="address" placeholder="기본 주소" readonly></p>
-        <p><input type="text" id="detail_address" placeholder="상세 주소"></p>
+        <p><input type="text" id="detail_address" placeholder="상세 주소" maxlength="15"></p>
         <br>
         <button type="submit" onclick="change_info()">정보 변경</button>
         <br><br>

@@ -106,14 +106,15 @@ const change_info = (req, res)=>{
     info.password = crypto.createHash('sha256').update(info.password).digest('hex');
 
     if(common_routes.fnc_check_session(req, result) == 'logined'){
-        connection.query('UPDATE users SET password=?, phone_number=?, email=?, zonecode=?, address=?, detail_address=? WHERE id=?', 
-        [info.password, info.phone_number, info.email, info.zonecode, info.address, info.detail_address, id], (err, results)=>{
+        connection.query('UPDATE users SET password=?, phone_number=?, name=?, email=?, zonecode=?, address=?, detail_address=? WHERE id=?', 
+        [info.password, info.phone_number, info.name, info.email, info.zonecode, info.address, info.detail_address, id], (err, results)=>{
             if(err){
                 console.log(err);
                 res.send({error:err});
             } else{
                 req.session.password = info.password;
                 req.session.phone_number = info.phone_number;
+                req.session.name = info.name;
                 req.session.email = info.email;
                 req.session.zonecode = info.zonecode;
                 req.session.address = info.address;

@@ -9,6 +9,7 @@ const auto_change_info = (req, res)=>{
         res.send({result: false});
     } else{
         let users = {
+            name: req.session.name,
             phone_number: req.session.phone_number,
             email: req.session.email,
             zonecode: req.session.zonecode,

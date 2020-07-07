@@ -101,7 +101,7 @@
         <input type="number" id="phone_number3" oninput="numberMax(this)">
         <br>
         <p>이메일</p>
-        <input type="text" id="email" placeholder="email"> @
+        <input type="text" id="email" placeholder="email" maxlength="15"> @
         <select id="email_form">
             <option value="">---</option>
             <option value="gmail.com">gmail.com</option>
@@ -116,7 +116,7 @@
             <button onclick="search_address()">주소 찾기</button>
         </p>
         <p><input type="text" id="address" placeholder="기본 주소" readonly></p>
-        <p><input type="text" id="detail_address" placeholder="상세 주소"></p>
+        <p><input type="text" id="detail_address" placeholder="상세 주소" maxlength="10"></p>
         <br>
         <button type="submit" id="signup" onclick="signup()">회원가입</button>
         <br><br>
